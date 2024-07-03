@@ -19,8 +19,12 @@ genome: ""
 ## path to OrthoDB protein fasta ##
 orthodb: ""
 
+
+## data format ##
+rnaseq_format: "bam"
+
 ## directory containing fastq files ""
 fastqDir: ""
 
 ## directory containing bam files ##
-bams: "data/bams/"
+bamdir: "data/bams/"

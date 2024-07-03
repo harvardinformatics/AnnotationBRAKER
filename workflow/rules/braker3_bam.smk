@@ -1,18 +1,18 @@
-get_bam_input(bamdir):
-    bamfiles=glob("%s*bam" % bamdir)
-    bamstring = ",".join(bamfiles)
-    return bamstring
+#get_bam_input(bamdir):
+#    bamfiles=glob("%s*bam" % bamdir)
+#    bamstring = ",".join(bamfiles)
+#    return bamstring
 
 rule braker3_bams:
     input:
         proteindb=config["orthodb"]
-        bams=get_bam_input[config["bamdir"]
+        bams=expand("{directory}*{sample}*.bam",directory=config["bamdir"],sample=SAMPLES)
         genome=config["genome"]
     params:
         brakersif=config["brakersif"]
         species=config["species"]
     output:
-        "results/braker/braker.gtf"
+        "results/braker3/braker/braker.gtf"
     threads: 48
     shell:
        """
