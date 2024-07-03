@@ -1,0 +1,26 @@
+
+########################
+## RNA-SEQ FASTQ FILES #
+########################
+
+
+## path to singularity image ##
+brakersif: ""
+
+## species ##
+species: ""
+
+## table of sample IDs from which to derive ID strings for fastq files ##
+sampleTable: ""
+
+## Genome ##
+genome: ""
+
+## path to OrthoDB protein fasta ##
+orthodb: ""
+
+## directory containing fastq files ""
+fastqDir: ""
+
+## directory containing bam files ##
+bams: "data/bams/"

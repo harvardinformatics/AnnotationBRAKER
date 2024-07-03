@@ -1,0 +1,17 @@
+executor: slurm
+use-conda: True
+jobs: 100
+latency-wait: 100
+retries: 0
+
+set-threads:
+        braker3: 48
+
+set-resources:
+    braker3:
+        nodes: 1
+        threads: 48
+        mem_mb: 96000
+        slurm_partition: "unrestricted"
+        runtime: "72:00:00"
+

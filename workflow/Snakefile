@@ -1,0 +1,19 @@
+from glob import glob
+from os.path import basename
+from os import system
+import pandas as pd
+import os.path
+
+configfile: "config/config.yaml"
+
+sampleinfo = pd.read_table(config["sampleTable"])
+SAMPLES=list(sampleinfo.loc[:,"sampleid"])
+
+
+
+rule all:
+    input:
+        "results/braker/braker.gtf"
+    default_target: True
+
+include: "rules/braker3.smk"
