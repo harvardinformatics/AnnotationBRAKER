@@ -1,0 +1,7 @@
+results/*
+logs/*
+data/*
+*sif
+.snakemake
+sampletable.tsv
+braker3_snakemake_slurm.sh
