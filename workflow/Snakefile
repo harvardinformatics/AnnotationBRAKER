@@ -10,6 +10,7 @@ sampleinfo = pd.read_table(config["sampleTable"])
 SAMPLES=list(sampleinfo.loc[:,"sampleid"])
 
 if config["rnaseq_format"] == "bam":
+    BAMS=list(sampleinfo.loc[:,"bam"])
     rule all:
         input:
             "results/braker3/braker/braker.gtf"

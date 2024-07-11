@@ -5,19 +5,19 @@
 
 
 ## path to singularity image ##
-brakersif: ""
+brakersif: "braker3.sif"
 
 ## species ##
-species: ""
+species: "dmel_eval"
 
 ## table of sample IDs from which to derive ID strings for fastq files ##
-sampleTable: ""
+sampleTable: "sampletable.tsv"
 
 ## Genome ##
-genome: ""
+genome: "data/headercleaned_GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna"
 
 ## path to OrthoDB protein fasta ##
-orthodb: ""
+orthodb: "data/orthoDBv100_arthropoda.fasta"
 
 
 ## data format ##

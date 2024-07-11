@@ -1,18 +1,16 @@
-#get_bam_input(bamdir):
-#    bamfiles=glob("%s*bam" % bamdir)
-#    bamstring = ",".join(bamfiles)
-#    return bamstring
+localrules: braker_mover
 
 rule braker3_bams:
     input:
-        proteindb=config["orthodb"]
-        bams=expand("{directory}*{sample}*.bam",directory=config["bamdir"],sample=SAMPLES)
+        proteindb=config["orthodb"],
+        bams=expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS),
         genome=config["genome"]
     params:
-        brakersif=config["brakersif"]
-        species=config["species"]
+        brakersif=config["brakersif"],
+        species=config["species"],
+        bamstring=",".join(expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS))
     output:
-        "results/braker3/braker/braker.gtf"
+        "braker/braker.gtf"
     threads: 48
     shell:
        """
@@ -20,12 +18,24 @@ rule braker3_bams:
        singularity exec --no-home \
                  --home /opt/gm_key \
                  --cleanenv \
-                 --env AUGUSTUS_CONFIG_PATH=\${{PWD}}augustus_config \
+                 --env AUGUSTUS_CONFIG_PATH=${{PWD}}/augustus_config \
                  {params.brakersif} braker.pl \
                  --prot_seq={input.proteindb} \
-                 --bam={input.bams} \
-                 --species={myspecies}_eval \
-                 --genome={genome} \
+                 --bam={params.bamstring} \
+                 --species={params.species}_eval \
+                 --genome={input.genome} \
                  --threads={threads}
        """       
 
+rule braker_mover:
+    input:
+        "braker/braker.gtf"
+    output:
+        "results/braker3/braker/braker.gtf"
+    threads: 1
+    shell:
+        """
+        mkdir -p results/braker3
+        mv augustus_config results/braker3
+        mv braker results/braker3
+        """

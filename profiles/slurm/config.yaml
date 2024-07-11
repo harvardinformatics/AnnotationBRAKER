@@ -5,13 +5,11 @@ latency-wait: 100
 retries: 0
 
 set-threads:
-        braker3: 48
+    braker3_bams: 48
 
 set-resources:
-    braker3:
+    braker3_bams:
         nodes: 1
-        threads: 48
         mem_mb: 96000
-        slurm_partition: "unrestricted"
-        runtime: "72:00:00"
-
+        slurm_partition: "shared,unrestricted"
+        runtime: 360  #"72:00:00"
