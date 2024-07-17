@@ -11,5 +11,5 @@ set-resources:
     braker3_bams:
         nodes: 1
         mem_mb: 96000
-        slurm_partition: "shared,unrestricted"
-        runtime: 360  #"72:00:00"
+        slurm_partition: ""
+        runtime: "48h" # this setting allocates 48 hours, adjust as needed
