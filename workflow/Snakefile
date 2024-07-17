@@ -17,3 +17,5 @@ if config["rnaseq_format"] == "bam":
         default_target: True
 
     include: "rules/braker3_bam.smk"
+
+include: "rules/brakermover.smk"
