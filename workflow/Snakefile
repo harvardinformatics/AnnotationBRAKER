@@ -4,6 +4,7 @@ from os import system
 import pandas as pd
 import os.path
 
+
 configfile: "config/config.yaml"
 
 sampleinfo = pd.read_table(config["sampleTable"])
@@ -16,6 +17,6 @@ if config["rnaseq_format"] == "bam":
             "results/braker3/braker/braker.gtf"
         default_target: True
 
-    include: "rules/braker3_bam.smk"
+    include: "rules/braker3_bams.smk"
 
 include: "rules/brakermover.smk"
