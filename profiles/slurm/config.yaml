@@ -10,6 +10,8 @@ set-threads:
 set-resources:
     braker3_bams:
         nodes: 1
+        tasks: 1
+        cpus_per_task: 48
         mem_mb: 96000
         slurm_account: "informatics"
         slurm_partition: "shared,unrestricted"
