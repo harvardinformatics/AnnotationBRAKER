@@ -9,10 +9,10 @@ brakersif: "braker3.sif"
 
 ## species ##
 #put a name here for your species that DOES NOT match an existing AUGUSTUS species name
-species: "dmel_eval" 
+species: "dmel" 
 
 ## table of sample IDs from which to derive ID strings for fastq files ##
-sampleTable: "samplesheet.tsv"
+sampleTable: "samplesheet_fastq.tsv"
 
 ## Genome ##
 # path to soft-masked genome fasta
@@ -23,10 +23,13 @@ orthodb: "data/Arthropoda.fa"
 
 
 ## data format ##
-rnaseq_format: "bam" # available options are bam and fastq
+rnaseq_format: "fastq" # available options are bam and fastq
 
 ## directory containing fastq files ""
-fastqDir: ""
+fastqDir: "data/fastq"
 
 ## directory containing bam files ##
-bamdir: "data/bams/"
+bamdir: ""
+
+## directory for STAR index if fastq is input
+StarIndexDir: "results/starindex/"

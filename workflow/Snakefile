@@ -3,6 +3,14 @@ from os.path import basename
 from os import system
 import pandas as pd
 import os.path
+from numpy import log2
+import gzip
+import yaml
+from datetime import datetime
+slurm_profile_path = "profiles/slurm/config.yaml"
+with open(slurm_profile_path, 'r') as file:
+    slurm_config = yaml.safe_load(file)
+
 
 configfile: "config/config.yaml"
 
@@ -11,11 +19,26 @@ SAMPLES=list(sampleinfo.loc[:,"sampleid"])
 
 if config["rnaseq_format"] == "bam":
     BAMS=list(sampleinfo.loc[:,"bam"])
-    rule all:
+    include: "rules/braker3_bam.smk"
+
+elif config["rnaseq_format"] =="fastq":
+
+    sampleinfo = pd.read_table(config["sampleTable"])
+    #SAMPLES=list(sampleinfo.loc[:,"sampleid"])
+    #sample2fastq = {}
+    #for i in range(len(SAMPLES)):
+    #    sample2fastq[sampleinfo["sampleid"][i]] = {'r1': sampleinfo["R1"][i],'r2': sampleinfo["R2"][i]} 
+    include: "rules/star.smk"
+    include: "rules/starindex.smk"
+    include: "rules/braker3_fastq.smk"
+
+else:
+    raise ValueError("input rna-seq data type not among supported types: bam, fastq")
+
+rule all:
         input:
             "results/braker3/braker/braker.gtf"
         default_target: True
 
-    include: "rules/braker3_bam.smk"
 
 include: "rules/brakermover.smk"
