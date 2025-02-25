@@ -1,12 +1,12 @@
-rule braker3_bams:
+rule braker3_fastq:
     input:
         proteindb=config["orthodb"],
-        bams=expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS),
+        bams=expand("results/star2ndpass/sorted_{sample}_STAR2ndpassAligned.out.bam",sample=SAMPLES),
         genome=config["genome"]
     params:
         brakersif=config["brakersif"],
         species='{}_{}'.format(config["species"],str(datetime.now().strftime("%m_%d_%Y_%H_%M_%S"))),
-        bamstring=",".join(expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS))
+        bamstring=",".join(expand("results/star2ndpass/sorted_{sample}_STAR2ndpassAligned.out.bam",sample=SAMPLES))
     output:
         "braker/braker.gtf"
     shell:
@@ -19,7 +19,7 @@ rule braker3_bams:
                  {params.brakersif} braker.pl \
                  --prot_seq={input.proteindb} \
                  --bam={params.bamstring} \
-                 --species={params.species}_eval \
+                 --species={params.species} \
                  --genome={input.genome} \
                  --threads={resources.cpus_per_task}
        """       

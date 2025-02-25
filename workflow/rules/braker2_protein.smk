@@ -1,12 +1,10 @@
-rule braker3_bams:
+rule braker2_protein:
     input:
         proteindb=config["orthodb"],
-        bams=expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS),
         genome=config["genome"]
     params:
         brakersif=config["brakersif"],
         species='{}_{}'.format(config["species"],str(datetime.now().strftime("%m_%d_%Y_%H_%M_%S"))),
-        bamstring=",".join(expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS))
     output:
         "braker/braker.gtf"
     shell:
@@ -18,8 +16,7 @@ rule braker3_bams:
                  --env AUGUSTUS_CONFIG_PATH=${{PWD}}/augustus_config \
                  {params.brakersif} braker.pl \
                  --prot_seq={input.proteindb} \
-                 --bam={params.bamstring} \
-                 --species={params.species}_eval \
+                 --species={params.species} \
                  --genome={input.genome} \
                  --threads={resources.cpus_per_task}
        """       

@@ -3,20 +3,43 @@ from os.path import basename
 from os import system
 import pandas as pd
 import os.path
+from numpy import log2
+import gzip
+import yaml
+from datetime import datetime
+slurm_profile_path = "profiles/slurm/config.yaml"
+with open(slurm_profile_path, 'r') as file:
+    slurm_config = yaml.safe_load(file)
+
 
 
 configfile: "config/config.yaml"
 
-sampleinfo = pd.read_table(config["sampleTable"])
-SAMPLES=list(sampleinfo.loc[:,"sampleid"])
+if config["protein_only"] == True:
+    include: "rules/braker2_protein.smk"
 
-if config["rnaseq_format"] == "bam":
-    BAMS=list(sampleinfo.loc[:,"bam"])
-    rule all:
+elif config["rnaseq_format"] in ["bam","fastq"]:
+    sampleinfo = pd.read_table(config["sampleTable"])
+    SAMPLES=list(sampleinfo.loc[:,"sampleid"])
+
+    if config["rnaseq_format"] == "bam":
+        BAMS=list(sampleinfo.loc[:,"bam"])
+        include: "rules/braker3_bams.smk"
+
+    elif config["rnaseq_format"] == "fastq":
+        include: "rules/star.smk"
+        include: "rules/starindex.smk"
+        include: "rules/braker3_fastq.smk"
+
+    else:
+        raise ValueError("input rna-seq data type not among supported types: bam, fastq")
+
+else:
+    raise ValueError("incorrect or missing value in config/config.yaml")
+
+rule all:
         input:
             "results/braker3/braker/braker.gtf"
         default_target: True
-
-    include: "rules/braker3_bams.smk"
 
 include: "rules/brakermover.smk"
