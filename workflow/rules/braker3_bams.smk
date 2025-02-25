@@ -9,7 +9,6 @@ rule braker3_bams:
         bamstring=",".join(expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS))
     output:
         "braker/braker.gtf"
-    threads: 48
     shell:
        """
        singularity exec --cleanenv {params.brakersif} cp -Rs /opt/Augustus/config/ augustus_config
@@ -22,5 +21,5 @@ rule braker3_bams:
                  --bam={params.bamstring} \
                  --species={params.species}_eval \
                  --genome={input.genome} \
-                 --threads={threads}
+                 --threads={resources.cpus_per_task}
        """       
