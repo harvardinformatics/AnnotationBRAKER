@@ -14,26 +14,27 @@ with open(slurm_profile_path, 'r') as file:
 
 configfile: "config/config.yaml"
 
-sampleinfo = pd.read_table(config["sampleTable"])
-SAMPLES=list(sampleinfo.loc[:,"sampleid"])
+if config["protein_only"] == True:
+    include: "rules/braker2_protein.smk"
 
-if config["rnaseq_format"] == "bam":
-    BAMS=list(sampleinfo.loc[:,"bam"])
-    include: "rules/braker3_bam.smk"
-
-elif config["rnaseq_format"] =="fastq":
-
+elif config["rnaseq_format"] in ["bam","fastq"]:
     sampleinfo = pd.read_table(config["sampleTable"])
-    #SAMPLES=list(sampleinfo.loc[:,"sampleid"])
-    #sample2fastq = {}
-    #for i in range(len(SAMPLES)):
-    #    sample2fastq[sampleinfo["sampleid"][i]] = {'r1': sampleinfo["R1"][i],'r2': sampleinfo["R2"][i]} 
-    include: "rules/star.smk"
-    include: "rules/starindex.smk"
-    include: "rules/braker3_fastq.smk"
+    SAMPLES=list(sampleinfo.loc[:,"sampleid"])
+
+    if config["rnaseq_format"] == "bam":
+        BAMS=list(sampleinfo.loc[:,"bam"])
+        include: "rules/braker3_bam.smk"
+
+    elif config["rnaseq_format"] == "fastq":
+        include: "rules/star.smk"
+        include: "rules/starindex.smk"
+        include: "rules/braker3_fastq.smk"
+
+    else:
+        raise ValueError("input rna-seq data type not among supported types: bam, fastq")
 
 else:
-    raise ValueError("input rna-seq data type not among supported types: bam, fastq")
+    raise ValueError("incorrect or missing value in config/config.yaml")
 
 rule all:
         input:

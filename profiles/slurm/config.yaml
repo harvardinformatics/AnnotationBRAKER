@@ -1,9 +1,3 @@
-executor: slurm
-use-conda: True
-jobs: 100
-latency-wait: 100
-retries: 0
-
 set-threads:
     star_index: 24
     star_1stpass: 8
@@ -11,9 +5,9 @@ set-threads:
     samsort_star: 12
     braker3_bams: 48
     braker3_fastq: 48
+    braker2_protein: 48
 
 set-resources:
-    # STAR spliced-alignment
     star_index:
         nodes: 1
         tasks: 1
@@ -42,10 +36,16 @@ set-resources:
         tasks: 1
         cpus_per_task: 48
         mem_mb: 96000
-        runtime: "48h" # this setting allocates 48 hours, adjust as needed
+        runtime: "48h"
     braker3_fastq:
        nodes: 1
        tasks: 1
        cpus_per_task: 48
        mem_mb: 96000
        runtime: "48h" 
+    braker2_protein:
+       nodes: 1
+       tasks: 1
+       cpus_per_task: 48
+       mem_mb: 96000
+       runtime: "48h"
