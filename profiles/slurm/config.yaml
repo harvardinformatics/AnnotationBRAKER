@@ -5,12 +5,47 @@ latency-wait: 100
 retries: 0
 
 set-threads:
+    star_index: 24
+    star_1stpass: 8
+    star_2ndpass: 8
+    samsort_star: 12
     braker3_bams: 48
+    braker3_fastq: 48
 
 set-resources:
+    # STAR spliced-alignment
+    star_index:
+        nodes: 1
+        tasks: 1
+        cpus_per_task: 24
+        mem_mb: 100000
+        runtime: 960
+    star_1stpass:
+        nodes: 1
+        tasks: 1
+        cpus_per_task: 8
+        mem_mb: 64000
+        runtime: 1920
+    star_2ndpass:
+        nodes: 1
+        tasks: 1
+        cpus_per_task: 8
+        mem_mb: 64000
+        runtime: 1920
+    samsort_star:
+        nodes: 1
+        tasks: 1
+        mem_mb: 24000
+        runtime: 360
     braker3_bams:
         nodes: 1
+        tasks: 1
+        cpus_per_task: 48
         mem_mb: 96000
-        slurm_account: "informatics"
-        slurm_partition: "shared,unrestricted"
         runtime: "48h" # this setting allocates 48 hours, adjust as needed
+    braker3_fastq:
+       nodes: 1
+       tasks: 1
+       cpus_per_task: 48
+       mem_mb: 96000
+       runtime: "48h" 
