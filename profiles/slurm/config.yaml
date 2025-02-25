@@ -1,8 +1,8 @@
-executor: slurm
-use-conda: True
-jobs: 100
-latency-wait: 100
-retries: 0
+#executor: slurm
+#use-conda: True
+#jobs: 100
+#latency-wait: 100
+#retries: 0
 
 set-threads:
     braker3_bams: 48
@@ -13,6 +13,4 @@ set-resources:
         tasks: 1
         cpus_per_task: 48
         mem_mb: 96000
-        slurm_account: "informatics"
-        slurm_partition: "shared,unrestricted"
         runtime: "48h" # this setting allocates 48 hours, adjust as needed

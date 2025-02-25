@@ -9,8 +9,6 @@ rule braker3_bams:
         bamstring=",".join(expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS))
     output:
         "braker/braker.gtf"
-    #resources:
-    #    cpus=slurm_config['set-resources']['braker3_bams']['cpus_per_task']   
     shell:
        """
        singularity exec --cleanenv {params.brakersif} cp -Rs /opt/Augustus/config/ augustus_config
