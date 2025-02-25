@@ -5,31 +5,32 @@
 
 
 ## path to singularity image ##
-brakersif: "braker3.sif"
+brakersif: ""
 
 ## species ##
 #put a name here for your species that DOES NOT match an existing AUGUSTUS species name
-species: "dmel" 
+species: "" 
 
 ## table of sample IDs from which to derive ID strings for fastq files ##
-sampleTable: "samplesheet_fastq.tsv"
+sampleTable: ""
 
 ## Genome ##
 # path to soft-masked genome fasta
-genome: "data/headercleaned_GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna"
+genome: ""
 
 ## path to OrthoDB protein fasta ##
-orthodb: "data/Arthropoda.fa"
+orthodb: ""
 
+protein_only: "" # boolean (True or False)
 
 ## data format ##
-rnaseq_format: "fastq" # available options are bam and fastq
+rnaseq_format: "" # available options are bam and fastq
 
 ## directory containing fastq files ""
-fastqDir: "data/fastq"
+fastqDir: ""
 
 ## directory containing bam files ##
 bamdir: ""
 
 ## directory for STAR index if fastq is input
-StarIndexDir: "results/starindex/"
+StarIndexDir: ""
