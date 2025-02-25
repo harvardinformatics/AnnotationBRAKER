@@ -1,7 +1,6 @@
-rule braker3_fastq:
+rule braker2_protein:
     input:
         proteindb=config["orthodb"],
-        bams=expand("results/star2ndpass/sorted_{sample}_STAR2ndpassAligned.out.bam",sample=SAMPLES),
         genome=config["genome"]
     params:
         brakersif=config["brakersif"],
