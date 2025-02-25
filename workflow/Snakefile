@@ -12,6 +12,7 @@ with open(slurm_profile_path, 'r') as file:
     slurm_config = yaml.safe_load(file)
 
 
+
 configfile: "config/config.yaml"
 
 if config["protein_only"] == True:
@@ -23,7 +24,7 @@ elif config["rnaseq_format"] in ["bam","fastq"]:
 
     if config["rnaseq_format"] == "bam":
         BAMS=list(sampleinfo.loc[:,"bam"])
-        include: "rules/braker3_bam.smk"
+        include: "rules/braker3_bams.smk"
 
     elif config["rnaseq_format"] == "fastq":
         include: "rules/star.smk"
@@ -40,6 +41,5 @@ rule all:
         input:
             "results/braker3/braker/braker.gtf"
         default_target: True
-
 
 include: "rules/brakermover.smk"

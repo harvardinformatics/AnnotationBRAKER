@@ -3,6 +3,3 @@ logs/*
 data/*
 *sif
 .snakemake
-braker/
-trash/
-augustus_config/
