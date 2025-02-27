@@ -23,7 +23,7 @@ mamba deactivate
 singularity build braker3.sif docker://teambraker/braker3:latest
 ``` 
 
-The location of the sif image must be specified in *config/config.yaml*.
+The location of *braker3.sif* must be specified in *config/config.yaml*.
 
 NOTE: when running this workflow, it will have to be done from inside the *snakemake* conda environment so that Snakemake is accessible. This workflow was developed to run on a cluster that uses SLURM as the job scheduler, and we have provided a SLURM job-runner script *braker_snakemake_slurm_runner.sh* , that can be modified for use with other schedulers. 
 
