@@ -6,7 +6,7 @@ This repository consists of a Snakemake workflow to produce an annotation of pro
 * Only using protein evidence, previously known as [BRAKER2](https://academic.oup.com/nargab/article/3/1/lqaa108/6066535)
 * Using both RNA-seq and protein evidence, aka BRAKER3. BRAKER3 runs separate protein-only and RNA-seq only gene prediction analyses, then merges them by selecting transcripts using a scoring schema with [TSEBRA](https://github.com/Gaius-Augustus/TSEBRA).
 
-All three implementations are executed from the same code base.
+We have found that BRAKER3 frequently outperforms BRAKER1 (see our [preprint](https://www.biorxiv.org/content/10.1101/2024.04.12.589245v2) for results supporting this claim). Thus, when RNA-seq data are provided, this workflow runs BRAKER3, i.e there is currently no option to run BRAKER1.
 
 ## Software requirements
 This workflow runs BRAKER from inside a Singularity container. Therefore, you need to do the following:
