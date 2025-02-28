@@ -1,0 +1,5 @@
+sampleid	bam
+SRR1765780	test/bams/sorted_SRR1765780_STAR2ndpassAligned.out.bam
+SRR1767340	test/bams/sorted_SRR1767340_STAR2ndpassAligned.out.bam
+SRR1767365	test/bams/sorted_SRR1767365_STAR2ndpassAligned.out.bam
+SRR1767366	test/bams/sorted_SRR1767366_STAR2ndpassAligned.out.bam

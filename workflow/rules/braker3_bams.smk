@@ -1,12 +1,14 @@
 rule braker3_bams:
     input:
         proteindb=config["orthodb"],
-        bams=expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS),
+        #bams=expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS),
+        bams=BAMS,
         genome=config["genome"]
     params:
         brakersif=config["brakersif"],
         species='{}_{}'.format(config["species"],str(datetime.now().strftime("%m_%d_%Y_%H_%M_%S"))),
-        bamstring=",".join(expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS))
+        #bamstring=",".join(expand("{directory}{bam}",directory=config["bamdir"],bam=BAMS))
+        bamstring=",".join(BAMS)
     output:
         "braker/braker.gtf"
     shell:

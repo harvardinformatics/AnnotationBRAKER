@@ -5,13 +5,7 @@ import pandas as pd
 import os.path
 from numpy import log2
 import gzip
-import yaml
 from datetime import datetime
-slurm_profile_path = "profiles/slurm/config.yaml"
-with open(slurm_profile_path, 'r') as file:
-    slurm_config = yaml.safe_load(file)
-
-
 
 configfile: "config/config.yaml"
 
