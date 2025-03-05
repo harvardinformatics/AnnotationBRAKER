@@ -13,8 +13,12 @@ if config["protein_only"] == True:
     include: "rules/braker2_protein.smk"
 
 elif config["rnaseq_format"] in ["bam","fastq"]:
+    
     sampleinfo = pd.read_table(config["sampleTable"])
     SAMPLES=list(sampleinfo.loc[:,"sampleid"])
+    
+    if config["star_index_dir"] == "":
+        config["star_index_dir"] = "results/star_index/"
 
     if config["rnaseq_format"] == "bam":
         BAMS=list(sampleinfo.loc[:,"bam"])
