@@ -9,9 +9,9 @@
 
 module purge
 module load python
-mamba activate snakemake_py311 # need to have created a snakemake conda environment
+mamba activate snakemake # need to have created a snakemake conda environment
 
-snakemake --snakefile workflow/Snakefile --use-conda  --profile ~/.config/snakemake/AnnotationBRAKER --workflow-profile ./profiles/slurm
+snakemake --snakefile workflow/Snakefile --profile /n/home14/afreedman/.config/snakemake/cannon/ --workflow-profile ./profiles/slurm
 
 
 
