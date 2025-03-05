@@ -8,18 +8,18 @@ rule star_1stpass:
     input:
         r1 = input_function_r1,
         r2 = input_function_r2,
-        index=config["StarIndexDir"] + "SA"
+        index=config["start_index_dir"] + "SA"
     output:
         "results/star1stpass/" + "{sample}" + "_STAR1stpassSJ.out.tab"
     conda:
         "../envs/star.yml"
     threads: 8
     params:
-        indexdir = config["StarIndexDir"]
+        indexdir = config["star_index_dir"]
     shell:
         """
         rm -rf results/star1stpass/{wildcards.sample}_1stpassSTARtmp
-        STAR --runThreadN {threads} --genomeDir {params.indexdir} \
+        STAR --runThreadN {resources.cpus_per_task} --genomeDir {params.indexdir} \
         --outFileNamePrefix results/star1stpass/{wildcards.sample}_STAR1stpass \
         --outTmpDir results/star1stpass/{wildcards.sample}_1stpassSTARtmp \
         --readFilesIn <(gunzip -c {input.r1}) <(gunzip -c {input.r2}) 
