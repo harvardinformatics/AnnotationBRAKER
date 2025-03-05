@@ -10,8 +10,9 @@
 module purge
 module load python
 mamba activate snakemake # need to have created a snakemake conda environment
+profile=$1
 
-snakemake --snakefile workflow/Snakefile --profile /n/home14/afreedman/.config/snakemake/cannon/ --workflow-profile ./profiles/slurm
+snakemake --snakefile workflow/Snakefile --profile $profile --workflow-profile ./profiles/slurm
 
 
 
