@@ -1,4 +1,4 @@
-def get_star_SAindexNbases():
+def get_star_sa_index_nbases():
     genome = open(config["genome"],"r")
     genome_length = 0
     for line in genome:
@@ -16,7 +16,7 @@ rule star_index:
         "../envs/star.yml"
     threads: 24
     params:
-        nbases=get_star_SAindexNbases(),
+        nbases=get_star_sa_index_nbases(),
         outdir=config["StarIndexDir"]
     shell:
         """
