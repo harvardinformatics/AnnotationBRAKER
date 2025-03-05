@@ -11,7 +11,7 @@ species: "test_braker3"
 sampleTable: "test/samplesheet_bam.tsv"
 
 ## path to star index dir
-star_index_dir=""
+star_index_dir: ""
 
 ## Genome ##
 # path to soft-masked genome fasta
