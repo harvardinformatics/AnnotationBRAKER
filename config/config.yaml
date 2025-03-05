@@ -3,13 +3,9 @@
 ## RNA-SEQ FASTQ FILES #
 ########################
 
-
-## path to singularity image ##
-brakersif: "braker3.sif"
-
 ## species ##
 #put a name here for your species that DOES NOT match an existing AUGUSTUS species name
-species: "dmel_braker3" 
+species: "test_braker3" 
 
 ## table of sample IDs from which to derive ID strings for fastq files ##
 sampleTable: "test/samplesheet_bam.tsv"
@@ -25,12 +21,3 @@ protein_only: False # boolean (True or False)
 
 ## data format ##
 rnaseq_format: "bam" # available options are bam and fastq
-
-## directory containing fastq files ""
-fastqDir: ""
-
-## directory containing bam files ##
-#bamdir: "../test/bams"
-
-## directory for STAR index if fastq is input
-StarIndexDir: ""
