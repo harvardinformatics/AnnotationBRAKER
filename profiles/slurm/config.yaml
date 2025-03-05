@@ -1,3 +1,6 @@
+use-singularity: true
+singularity-args: "--cleanenv --no-home --home /opt/gm_key"
+
 set-threads:
     star_index: 24
     star_1stpass: 8
