@@ -9,8 +9,7 @@ This repository consists of a Snakemake workflow to produce an annotation of pro
 We have found that BRAKER3 frequently outperforms BRAKER1 (see our [preprint](https://www.biorxiv.org/content/10.1101/2024.04.12.589245v2) for results supporting this claim). Thus, when RNA-seq data are provided, this workflow runs BRAKER3, i.e there is currently no option to run BRAKER1.
 
 ## Software requirements
-This workflow runs BRAKER from inside a Singularity container. Therefore, you need to do the following:
-1. If you haven't done so already, install Snakemake. We recommend doing this into a conda environment, using a MiniForge python distribution:
+To get this workflow to work, uou need to install Snakemake. We recommend doing this into a conda environment, using a MiniForge python distribution:
 ```bash
 mamba create -n snakemake python=3.11
 mamba activate snakemake
@@ -18,14 +17,7 @@ mamba install snakemake
 mamba install bioconda::snakemake-executor-plugin-slurm 
 mamba deactivate
 ``` 
-2. Create the BRAKER singularity container
-```bash
-singularity build braker3.sif docker://teambraker/braker3:latest
-``` 
-
-The location of *braker3.sif* must be specified in *config/config.yaml*.
-
-NOTE: when running this workflow, it will have to be done from inside the *snakemake* conda environment so that Snakemake is accessible. This workflow was developed to run on a cluster that uses SLURM as the job scheduler, and we have provided a SLURM job-runner script *braker_snakemake_slurm_runner.sh* , that can be modified for use with other schedulers. 
+When running this workflow, it will have to be done from inside the *snakemake* conda environment so that Snakemake is accessible. This workflow was developed to run on a cluster that uses SLURM as the job scheduler, and we have provided a SLURM job-runner script *braker_snakemake_slurm_runner.sh* , that can be modified for use with other schedulers. In addition, this workflow runs BRAKER from inside a singularity container which is installed on the fly. While we provide an example slurm profile config.yaml file, if you choose to modify this, or are running on a different HPC scheduler, you will need to make sure to specify the same singularity-related variable values in the profile configuration file.  
 
 ## Protein evidence
 Protein evidence for BRAKER2 and BRAKER3 should be in the form of a fasta file, derived from [OrthoDB](https://www.orthodb.org/), using a taxonomically relevant subset of the complete database. A convenient way to generate such fasta files is using [orthodb-clades](https://github.com/tomasbruna/orthodb-clades), written by the lead developer of BRAKER2. While this Snakemake workflow by default generates a handful of clade-level fasta files, as well as several species-level ones, it is straightforward to edit the underlying code to produce outputs customized to your taxonomic needs. In our experience, this is far easier than attempting to use the OrthoDB API.
