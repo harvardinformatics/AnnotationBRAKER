@@ -14,7 +14,8 @@ To get this workflow to work, uou need to install Snakemake. We recommend doing 
 mamba create -n snakemake python=3.11
 mamba activate snakemake
 mamba install snakemake
-mamba install bioconda::snakemake-executor-plugin-slurm 
+mamba install bioconda::snakemake-executor-plugin-slurm
+mamba install conda-forge::singularity 
 mamba deactivate
 ``` 
 When running this workflow, it will have to be done from inside the *snakemake* conda environment so that Snakemake is accessible. This workflow was developed to run on a cluster that uses SLURM as the job scheduler, and we have provided a SLURM job-runner script *braker_snakemake_slurm_runner.sh* , that can be modified for use with other schedulers. In addition, this workflow runs BRAKER from inside a singularity container which is installed on the fly. While we provide an example slurm profile config.yaml file, if you choose to modify this, or are running on a different HPC scheduler, you will need to make sure to specify the same singularity-related variable values in the profile configuration file.  
