@@ -4,7 +4,6 @@ rule braker3_fastq:
         bams=expand("results/star2ndpass/sorted_{sample}_STAR2ndpassAligned.out.bam",sample=SAMPLES),
         genome=config["genome"]
     params:
-        brakersif=config["brakersif"],
         species='{}_{}'.format(config["species"],str(datetime.now().strftime("%m_%d_%Y_%H_%M_%S"))),
         bamstring=",".join(expand("results/star2ndpass/sorted_{sample}_STAR2ndpassAligned.out.bam",sample=SAMPLES))
     output:
