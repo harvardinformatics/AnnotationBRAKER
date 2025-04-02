@@ -30,14 +30,14 @@ rule star_2ndpass:
         tablelist = expand("results/star1stpass/{sample}_STAR1stpassSJ.out.tab",sample=SAMPLES),
         r1 = input_function_r1,
         r2 = input_function_r2,
-        index=config["StarIndexDir"] + "SA"
+        index=config["star_index_dir"] + "SA"
     output:
         "results/star2ndpass/" + "{sample}" + "_STAR2ndpassAligned.out.sam"
     conda:
         "../envs/star.yml"
     threads: 8
     params:
-        indexdir = config["StarIndexDir"],
+        indexdir = config["star_index_dir"],
         tablestring = ' '.join(expand("results/star1stpass/{sample}_STAR1stpassSJ.out.tab", sample=SAMPLES))
     shell:
         """
