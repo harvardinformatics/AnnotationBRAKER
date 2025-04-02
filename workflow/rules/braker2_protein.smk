@@ -3,7 +3,6 @@ rule braker2_protein:
         proteindb=config["orthodb"],
         genome=config["genome"]
     params:
-        brakersif=config["brakersif"],
         species='{}_{}'.format(config["species"],str(datetime.now().strftime("%m_%d_%Y_%H_%M_%S"))),
     output:
         "braker/braker.gtf"
