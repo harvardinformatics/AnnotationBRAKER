@@ -5,10 +5,11 @@
 
 ## species ##
 #put a name here for your species that DOES NOT match an existing AUGUSTUS species name
-species: "test_braker3" 
+species: "test" 
 
 ## table of sample IDs from which to derive ID strings for fastq files ##
-sampleTable: "test/samplesheet_bam.tsv"
+fastq_sampleTable: "test/samplesheet_fastq.tsv"
+bam_sampleTable: "test/samplesheet_bam.tsv"
 
 ## path to star index dir
 star_index_dir: ""
@@ -20,7 +21,7 @@ genome: "test/genome/dmel_NC_004353.4_genome.fa"
 ## path to OrthoDB protein fasta ##
 orthodb: "test/dmel_dpseudo_dyak_NCBI.faa"
 
-protein_only: False # boolean (True or False)
+protein_only: False # boolean (True or False); set to True for BRAKER2, False for BRAKER3
 
 ## data format ##
 rnaseq_format: "bam" # available options are bam and fastq

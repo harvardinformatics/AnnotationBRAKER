@@ -16,25 +16,23 @@ orthodb_path = Path(config["orthodb"])
 if config["protein_only"] == True:
     include: "rules/braker2_protein.smk"
 
-elif config["rnaseq_format"] in ["bam","fastq"]:
-    
-    sampleinfo = pd.read_table(config["sampleTable"])
+elif config["rnaseq_format"] == "bam":
+    sampleinfo = pd.read_table(config["bam_sampleTable"])
     SAMPLES=list(sampleinfo.loc[:,"sampleid"])
-    
+    BAMS=list(sampleinfo.loc[:,"bam"])
+    include: "rules/braker3_bams.smk"
+
+elif config["rnaseq_format"] == "fastq":
+    sampleinfo = pd.read_table(config["fastq_sampleTable"])
+    SAMPLES=list(sampleinfo.loc[:,"sampleid"])
     if config["star_index_dir"] == "":
         config["star_index_dir"] = "results/star_index/"
+    include: "rules/star.smk"
+    include: "rules/starindex.smk"
+    include: "rules/braker3_fastq.smk"
 
-    if config["rnaseq_format"] == "bam":
-        BAMS=list(sampleinfo.loc[:,"bam"])
-        include: "rules/braker3_bams.smk"
-
-    elif config["rnaseq_format"] == "fastq":
-        include: "rules/star.smk"
-        include: "rules/starindex.smk"
-        include: "rules/braker3_fastq.smk"
-
-    else:
-        raise ValueError("input rna-seq data type not among supported types: bam, fastq")
+elif config["protein_only"] == False and config["rnaseq_format"] not in ["bam","fastq"]:
+    raise ValueError("input rna-seq data type not among supported types: bam, fastq")
 
 else:
     raise ValueError("incorrect or missing value in config/config.yaml")
