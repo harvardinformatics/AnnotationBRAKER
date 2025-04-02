@@ -2,7 +2,7 @@
 #SBATCH -J brakersnake
 #SBATCH -n 1                 
 #SBATCH -t 72:00:00        
-#SBATCH -p sapphire # add partition      
+#SBATCH -p "" # add partition      
 #SBATCH --mem=10000           
 #SBATCH -o logs/test.%A.out # need to create logs directory first  
 #SBATCH -e logs/test.%A.err  
