@@ -8,7 +8,7 @@ rule star_1stpass:
     input:
         r1 = input_function_r1,
         r2 = input_function_r2,
-        index=config["start_index_dir"] + "SA"
+        index=config["star_index_dir"] + "SA"
     output:
         "results/star1stpass/" + "{sample}" + "_STAR1stpassSJ.out.tab"
     conda:
