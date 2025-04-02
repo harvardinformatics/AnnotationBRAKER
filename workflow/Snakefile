@@ -10,7 +10,7 @@ from pathlib import Path
 
 configfile: "config/config.yaml"
 
-genome_path = Path(config["genome"]
+genome_path = Path(config["genome"])
 orthodb_path = Path(config["orthodb"])
 
 if config["protein_only"] == True:
